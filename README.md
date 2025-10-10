@@ -4,5 +4,4 @@ Repository latihan Pertemuan-1 sampai dengan Pertemuan-16<br>
  Kelompok GB1J 
  Tahun Ajaran 2025/2026 
  Semester Gasal<br>
- <br
  ![Logo ISBAL](logoisbal.png)
