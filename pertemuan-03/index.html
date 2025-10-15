@@ -39,7 +39,19 @@
 
         <section id="contact">
             <h2>Kontak Kami</h2>
-           <p>contoh from</p>
+              <form action="#" method="GET">
+                 <label for="name">Nama:</label>
+                 <input type="text" id="txNama" name="txNama" placeholder="Masukkan nama" required autocomplete="name">
+    
+                 <label for="email">Email:</label>
+                 <input type="email" id="txemail" name="txEmail" placeholder="Masukan email" required autocomplete="email">
+    
+                 <label for="message">Pesan:</label>
+                 <textarea id="txPesan" name="txPesan" rows="4" placeholder="Tulis pesan anda..." required></textarea>
+    
+                 <button type="submit">Kirim</button>
+                 <button type="reset">Batal</button>
+               </form>
         </section>
     </main>
 
