@@ -46,6 +46,13 @@ header ul a {
  #home p {
    text-align: justify;
  }
+
+ footer {
+   background : #222;
+   color: #aaa;
+   text-align: center;
+   padding: 10px;
+ }
   
     #home {
         background: linear-gradient(135deg, #667cb3 0%, #302e85 100%);
@@ -212,9 +219,4 @@ header ul a {
       }
     }
 
-    footer {
-      text-align: center;
-      color: #aaa;
-      padding: 10px;
-    }
- }
+    
