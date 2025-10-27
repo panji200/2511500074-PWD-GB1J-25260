@@ -31,6 +31,37 @@ header ul a {
   margin: 6px 12px;
 }
 
+ }
+ #home h2,
+ #about h2,
+ #contact h2 {
+   color: #003366;
+   border-bottom: 2px solid #003366;
+   padding-bottom: 6px;
+   margin-top: 0;
+   margin-bottom: 16px;
+
+  }
+
+ #home p {
+   text-align: justify;
+ }
+  
+    #home {
+        background: linear-gradient(135deg, #667cb3 0%, #302e85 100%);
+        color: #ffffff;
+        border-radius: 10px;
+        padding: 20px;
+        max-width: 700px;
+        margin: 20px auto;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.863);
+      }
+  
+      #home p {
+        font-size: 18px;
+        margin: 0;
+      }
+
 
 #about {
       background-color: #ffffff;
