@@ -10,8 +10,26 @@
    Line-height: 1.5;
     }
 
+header {
+  background: #003366;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
 
+header ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+}
 
+header ul a {
+  color: #fff;
+  text-decoration: none;
+  margin: 6px 12px;
+}
 
 
 #about {
