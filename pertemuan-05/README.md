@@ -5,4 +5,5 @@ Repository untuk tugas pertemuan-05 mata kuliah Pemrograman Web Dasar
 <li>copy index.html dan style.css folder pertemuan-04</li>
 <li>tombol hamburger</li>
 <li>class menu-toggle</li>
+<li>class menu-toggle mobile</li>
 </ol>

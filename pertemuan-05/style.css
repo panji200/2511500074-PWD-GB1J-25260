@@ -1,6 +1,6 @@
  *{
  box-sizing: border-box;
- 
+ }
 
  body {
    margin: 0;
@@ -80,6 +80,7 @@ header li a {
     cursor: pointer;
   }
 
+  
 @media(max-width: 600px) {
   header  {
     padding: 16px;
@@ -274,6 +275,6 @@ header li a {
       #contact button {
         width: 100%;
       }
+    
     }
-
-  }
+  
