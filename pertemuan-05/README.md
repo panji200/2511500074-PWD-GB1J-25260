@@ -7,4 +7,5 @@ Repository untuk tugas pertemuan-05 mata kuliah Pemrograman Web Dasar
 <li>class menu-toggle</li>
 <li>class menu-toggle mobile</li>
 <li>styling nav menu mobile</li>
+<li>membuat script.js</li>
 </ol>
