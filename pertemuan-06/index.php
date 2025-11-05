@@ -1,38 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Judul Halaman</title>
-</head>
-<body>
-  <header>
-    <h1>Ini Header</h1>
-    <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
-      &#9776;
-    </button>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">Tentang</a></li>
-        <li><a href="#contact">Kontak</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main>
-    <section id="home">
-      <h2>Selamat Datang</h2>
-      <p>Ini contoh paragraf HTML.</p>
-      <?php
-      echo "Hallo Dunia!";
-      ?>
-    </section>
-
-    <section id="about">
+      <section id="about">
       <h2>Tentang Saya</h2>
-      <p><strong>NIM:</strong> 2511500074</p>
       <?php
     
       $nim = "2511500074";
