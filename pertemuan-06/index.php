@@ -1,4 +1,6 @@
-      <section id="about">
+  <link rel="stylesheet" href="style.css">
+
+    <section id="about">
       <h2>Tentang Saya</h2>
       <?php
     
@@ -25,31 +27,4 @@
       <p><strong>Nama Kakak Perempuan:</strong> <?php echo $nama_kakak_perempuan; ?></p>
     </section>
 
-    <section id="contact">
-      <h2>Kontak Kami</h2>
-      <form action="" method="GET">
-        <label for="txtNama"><span>Nama:</span>
-          <input type="text" id="txtNama" name="txtNama" placeholder="Masukkan nama" required autocomplete="name">
-        </label>
-
-        <label for="txtEmail"><span>Email:</span>
-          <input type="email" id="txtEmail" name="txtEmail" placeholder="Masukkan email" required autocomplete="email">
-        </label>
-
-        <label for="txtPesan"><span>Pesan Anda:</span>
-          <textarea id="txtPesan" name="txtPesan" rows="4" placeholder="Tulis pesan anda..." required></textarea>
-        </label>
-
-        <button type="submit">Kirim</button>
-        <button type="reset">Batal</button>
-      </form>
-    </section>
   </main>
-
-  <footer>
-
-    <script src="script.js"></script>
-    <p>&copy; 2025 panji [2511500074]</p>
-  </footer>
-</body>
-</html>
