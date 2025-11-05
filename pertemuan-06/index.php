@@ -169,40 +169,7 @@ $IPK = $totalSKS > 0 ? $totalBobot / $totalSKS : 0;
 ?>
 
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h2 {
-            color: #003366;
-            border-bottom: 2px solid #003366;
-            padding-bottom: 10px;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .label {
-            text-align: right;
-            font-weight: bold;
-            width: 200px;
-            display: inline-block;
-        }
-        .value {
-            text-align: left;
-            display: inline-block;
-        }
-        .matkul {
-            margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            background-color: #f9f9f9;
-        }
-        .total {
-            font-weight: bold;
-            margin-top: 20px;
-        }
-    </style>
+    
 </head>
 <body>
     <h2>Nilai Saya</h2>
