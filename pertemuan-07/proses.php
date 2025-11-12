@@ -1,5 +1,5 @@
 <?php
-echo $_GET["txtNama"];
-echo $_GET["txtEmail"];
-echo $_GET["txtPesan"];
+$sesnama = $_POST["txtNama"];
+$sesemail = $_POST["txtEmail"];
+$sespesan = $_POST["txtPesan"];
 ?>
