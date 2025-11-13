@@ -13,4 +13,5 @@ Proses saya mengerjakan UTS ini sebagai berikut:<br>
   <li>menyimpan nilai input ke variabel</li>
   <li>about ditentang saya lakukan echo sesuai nama fariabel yang telah kita buat</li>
   <li>membuat section baru Entry Data Mahasiswa</li>
+  <li>buat form dengan sesuai yang kita buat di sesion</li>
 </ol>
