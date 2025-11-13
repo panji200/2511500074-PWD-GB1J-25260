@@ -9,4 +9,6 @@ Proses saya mengerjakan UTS ini sebagai berikut:<br>
 <ol>
   <li>download file zip di elearning dan di extract</li>
   <li>menambahkan action=uts.php</li>
+  <li>pada java script ubah dari e.target.reset</li>
+  <li>
 </ol>
