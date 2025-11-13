@@ -10,5 +10,5 @@ Proses saya mengerjakan UTS ini sebagai berikut:<br>
   <li>download file zip di elearning dan di extract</li>
   <li>menambahkan action=uts.php</li>
   <li>pada java script ubah dari e.target.reset</li>
-  <li>
+  <li>menyimpan nilai input ke variabel</li>
 </ol>
