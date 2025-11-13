@@ -1,24 +1,19 @@
-<?php
-session_start();
-
-$sesnama = "";
-if (isset($_SESSION["sesnama"])):
-  $sesnama = $_SESSION["sesnama"];
-endif;
-
-$sesemail = "";
-if (isset($_SESSION["sesemail"])):
-  $sesemail = $_SESSION["sesemail"];
-endif;
-
-$sespesan = "";
-if (isset($_SESSION["sespesan"])):
-  $sespesan = $_SESSION["sespesan"];
-endif;
-?>
-
 <!DOCTYPE html>
 <html lang="en">
+<?php
+session_start();
+$sesnim = $_SESSION["sesnim"] ?? "";
+$sesnama = $_SESSION["txtnamalengkap"] ?? "";  
+$sestempatlahir = $_SESSION["txttempatlahir"] ?? "";
+$sestanggallahir = $_SESSION["txttanggallahir"] ?? "";
+$seshobi = $_SESSION["txthobi"] ?? "";
+$sespasangan = $_SESSION["txtpasangan"] ?? "";
+$sespekerjaan = $_SESSION["txtpekerjaan"] ?? "";
+$sesnamaortu = $_SESSION["txtnamaortu"] ?? "";
+$sesnamakakak = $_SESSION["txtnamakakak"] ?? "";
+$sesnamaadik = $_SESSION["txtnamaadik"] ?? "";
+
+?>
 
 <head>
   <meta charset="UTF-8">
@@ -38,6 +33,7 @@ endif;
         <li><a href="#home">Beranda</a></li>
         <li><a href="#about">Tentang</a></li>
         <li><a href="#contact">Kontak</a></li>
+      
       </ul>
     </nav>
   </header>
@@ -52,68 +48,128 @@ endif;
       <p>Ini contoh paragraf HTML.</p>
     </section>
 
+
+    
+
+  <section id="contact">
+      <br><h2>Biodata Sederhana Mahasiswa</h2></br>
+      <form action="ulangan.php" method="POST">
+
+        <label for="txtnim"><span>NIM:</span>
+          <input type="Nim" id="txtnim" name="txtnim" placeholder="isi nim anda........." required autocomplete="nim">
+        </label>
+
+        <label for="txtnamalengkap"><span>Nama Lengkap:</span>
+          <input type="Nama" id="txtnamalengkap" name="txtnamalengkap" placeholder="isi nama lengkap anda........." required autocomplete="nama">
+        </label>
+
+        <label for="txttempatlahir"><span>Tempat Lahir:</span>
+          <input type="Tempat lahir" id="txttempatlahir" name="txttempatlahir" placeholder="isi tempat lahir anda........." required autocomplete="email">
+        </label>
+
+        <label for="txttanggallahir"><span>Tanggal Lahir:</span>
+          <input type="Tanggal lahir" id="txttanggallahir" name="txttanggallahir" placeholder="isi tanggal lahir anda........." required autocomplete="email">
+        </label>
+
+        <label for="txthobi"><span>Hobi:</span>
+          <input type="hobi" id="txthobi" name="txthobi" placeholder="isi hobi anda........." required autocomplete="email">
+        </label>
+
+        <label for="txtpasangan"><span>Pasangan:</span>
+          <input type="pasangan" id="txtpasangan" name="txtpasangan" placeholder="isi pasangan anda kalau ada........." required autocomplete="email">
+        </label>
+
+        
+        <label for="txtpekerjaan"><span>Pekerjaan:</span>
+          <input type="pekerjaan" id="txtpekerjaan" name="txtpekerjaan" placeholder="isi pekerjaan anda........." required autocomplete="email">
+        </label>
+
+        <label for="txtnamaortu"><span>Nama Orang Tua:</span>
+          <input type="nama orang tua" id="txtnamaortu" name="txtnamaortu" placeholder="isi nama orang tua anda........." required autocomplete="email">
+        </label>
+
+        <label for="txtnamakakak"><span>Nama Kakak:</span>
+          <input type="nama kakak" id="txtnamakakak" name="txtnamakakak" placeholder="isi nama kakak anda........." required autocomplete="email">
+        </label>
+
+        <label for="txtnamaadik"><span>Nama Adik:</span>
+          <input type="nama adik" id="txtnamadik" name="txtnamaadik" placeholder="isi nama adik anda........." required autocomplete="email">
+        </label>
+
+  
+
+        <button type="submit">Kirim</button>
+        <button type="reset">Batal</button>
+      </form>
+
+
+      
+
+    </section>
+
     <section id="about">
       <?php
-      $nim = 2511500010;
-      $NIM = '0344300002';
-      $nama = "Say'yid Abdullah";
-      $Nama = 'Al\'kautar Benyamin';
-      $tempat = "Jebus";
+          $nim = "2511500074&hearts;";
+          $Nama_Lengkap = "PANJI&hearts;";
+          $Tempat_Lahir = "Beruas&hearts;";
+          $Tanggal_Lahir = "30-10-2004&hearts;";
+          $hobi = "Memancing";
+          $Pasangan = "Belum ada&hearts;";
+          $Pekerjaan = "Petani sawit&hearts;";
+          $Nama_orang_tua ="Agani&hearts;";
+          $Nama_kakak = "Randi&hearts;";
+          $Nama_adik = "Alex&hearts;";
       ?>
+
       <h2>Tentang Saya</h2>
-      <p><strong>NIM:</strong><?php echo $sesnim?></p>
-      <p><strong>Nama lengkap:</strong><?php echo $sesnama?></p>
+      <p><strong>NIM:</strong><?php echo $sesnim?> </p>
+      <p><strong>Nama Lengkap:</strong><?php echo $sesnama?></p>
       <p><strong>Tempat Lahir:</strong><?php echo $sestempatlahir?></p>
-      <p><strong>Tanggal Lahir:</strong><?php echo $sestanggallahir?></p>
+      <p><strong>Tanggal Lahir:</strong> <?php echo $sestanggallahir?></p>
       <p><strong>Hobi:</strong><?php echo $seshobi?></p>
-      <p><strong>Pasangan:</strong><?php echo $sespasangan?></p>
+      <p><strong>Pasangan:</strong> <?php echo $sespasangan ?></p>
       <p><strong>Pekerjaan:</strong><?php echo $sespekerjaan?></p>
-      <p><strong>Nama Orang Tua:</strong><?php echo $sesnamaortu?></p>
-      <p><strong>Nama Kakak:</strong><?php echo $sesnamakakak?></p>
-      <p><strong>Nama Adik:</strong><?php echo $sesnamaadik?></p>
+      <p><strong>Nama Orang Tua:</strong> <?php echo $sesnamaortu?></p>
+      <p><strong>Nama Kakak:</strong> <?php echo $sesnamakakak?></p>
+      <p><strong>Nama Adik:</strong> <?php echo $sesnamaadik?></p>
     </section>
-      
+
 
     <section id="contact">
       <h2>Kontak Kami</h2>
-      <form action="proses.php" method="POST">
+      <form action=" " method="POST">
 
-        <label for="txtNama"><span>Nama:</span>
-          <input type="text" id="txtNama" name="txtNama" placeholder="Masukkan nama" required autocomplete="name">
+        <label for="txtnama"><span>Nama:</span>
+          <input type="text" id="sesnamaaku" name="txtnamaaku" placeholder="Masukkan nama" required autocomplete="name">
         </label>
 
         <label for="txtEmail"><span>Email:</span>
-          <input type="email" id="txtEmail" name="txtEmail" placeholder="Masukkan email" required autocomplete="email">
+          <input type="email" id="sesEmailaku" name="txtEmailaku" placeholder="Masukkan email" required autocomplete="email">
         </label>
 
         <label for="txtPesan"><span>Pesan Anda:</span>
-          <textarea id="txtPesan" name="txtPesan" rows="4" placeholder="Tulis pesan anda..." required></textarea>
+          <textarea id="txtPesan" name="sesPesanaku" rows="4" placeholder="Tulis pesan anda..." required></textarea>
           <small id="charCount">0/200 karakter</small>
         </label>
 
 
         <button type="submit">Kirim</button>
         <button type="reset">Batal</button>
+
+
+
       </form>
-
-      <?php if (!empty($sesnama)): ?>
-        <br><hr>
-        <h2>Yang menghubungi kami</h2>
-        <p><strong>Nama :</strong> <?php echo $sesnama ?></p>
-        <p><strong>Email :</strong> <?php echo $sesemail ?></p>
-        <p><strong>Pesan :</strong> <?php echo $sespesan ?></p>
-      <?php endif; ?>
+</section>
 
 
 
-    </section>
   </main>
 
   <footer>
-    <p>&copy; 2025 Yohanes Setiawan Japriadi [0344300002]</p>
+    <p><marquee>&copy; 2025 PANJI[2511500074]</marquee></p>
   </footer>
 
   <script src="script.js"></script>
 </body>
-
+  
 </html>

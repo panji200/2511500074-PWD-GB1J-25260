@@ -8,4 +8,5 @@ Kelompok: GB1J<br>
 Proses saya mengerjakan UTS ini sebagai berikut:<br>
 <ol>
   <li>download file zip di elearning dan di extract</li>
+  <li>menambahkan action=uts.php</li>
 </ol>
