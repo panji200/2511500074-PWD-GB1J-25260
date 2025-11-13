@@ -14,5 +14,5 @@ Proses saya mengerjakan UTS ini sebagai berikut:<br>
   <li>about ditentang saya lakukan echo sesuai nama fariabel yang telah kita buat</li>
   <li>membuat section baru Entry Data Mahasiswa</li>
   <li>buat form dengan sesuai yang kita buat di sesion</li>
-  <li>menambah styling header dan footer</li>
+  <li>menambah header dan footer</li>
 </ol>
