@@ -11,4 +11,6 @@ Proses saya mengerjakan UTS ini sebagai berikut:<br>
   <li>menambahkan action=uts.php</li>
   <li>pada java script ubah dari e.target.reset</li>
   <li>menyimpan nilai input ke variabel</li>
+  <li>about ditentang saya lakukan echo sesuai nama fariabel yang telah kita buat</li>
+  <li>membuat section baru Entry Data Mahasiswa</li>
 </ol>
