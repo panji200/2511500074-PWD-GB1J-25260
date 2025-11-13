@@ -1,19 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 session_start();
-$sesnim = $_SESSION["sesnim"] ?? "";
-$sesnama = $_SESSION["txtnamalengkap"] ?? "";  
-$sestempatlahir = $_SESSION["txttempatlahir"] ?? "";
-$sestanggallahir = $_SESSION["txttanggallahir"] ?? "";
-$seshobi = $_SESSION["txthobi"] ?? "";
-$sespasangan = $_SESSION["txtpasangan"] ?? "";
-$sespekerjaan = $_SESSION["txtpekerjaan"] ?? "";
-$sesnamaortu = $_SESSION["txtnamaortu"] ?? "";
-$sesnamakakak = $_SESSION["txtnamakakak"] ?? "";
-$sesnamaadik = $_SESSION["txtnamaadik"] ?? "";
 
+// Debug: tampilkan semua session
+echo "<!-- Session Data: ";
+print_r($_SESSION);
+echo " -->";
+
+$sesnim = $_SESSION["nim"] ?? '';
+$sesnama = $_SESSION["namalengkap"] ?? '';  
+$sestempatlahir = $_SESSION["tempatlahir"] ?? '';
+$sestanggallahir = $_SESSION["tanggallahir"] ?? '';
+$seshobi = $_SESSION["hobi"] ?? '';
+$sespasangan = $_SESSION["pasangan"] ?? '';
+$sespekerjaan = $_SESSION["pekerjaan"] ?? '';
+$sesnamaortu = $_SESSION["namaortu"] ?? '';
+$sesnamakakak = $_SESSION["namakakak"] ?? '';
+$sesnamaadik = $_SESSION["namaadik"] ?? '';
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
@@ -52,11 +58,11 @@ $sesnamaadik = $_SESSION["txtnamaadik"] ?? "";
     
 
   <section id="contact">
-      <br><h2>Biodata Sederhana Mahasiswa</h2></br>
-      <form action="ulangan.php" method="POST">
+      <h2>Biodata Sederhana Mahasiswa</h2>
+      <form action="proses.php" method="POST">
 
-        <label for="txtnim"><span>NIM:</span>
-          <input type="Nim" id="txtnim" name="txtnim" placeholder="isi nim anda........." required autocomplete="nim">
+        <label for="txtNim"><span>Nim:</span>
+          <input type="Nim" id="txtNim" name="txtNim" placeholder="isi nim anda........." required autocomplete="nim">
         </label>
 
         <label for="txtnamalengkap"><span>Nama Lengkap:</span>
@@ -64,39 +70,38 @@ $sesnamaadik = $_SESSION["txtnamaadik"] ?? "";
         </label>
 
         <label for="txttempatlahir"><span>Tempat Lahir:</span>
-          <input type="Tempat lahir" id="txttempatlahir" name="txttempatlahir" placeholder="isi tempat lahir anda........." required autocomplete="email">
+          <input type="Tempat Lahir" id="txttempatlahir" name="txttempatlahir" placeholder="isi tempat lahir anda........." required autocomplete="email">
         </label>
 
         <label for="txttanggallahir"><span>Tanggal Lahir:</span>
-          <input type="Tanggal lahir" id="txttanggallahir" name="txttanggallahir" placeholder="isi tanggal lahir anda........." required autocomplete="email">
+          <input type="Tanggal Lahir" id="txttanggallahir" name="txttanggallahir" placeholder="isi tanggal lahir anda........." required autocomplete="email">
         </label>
 
         <label for="txthobi"><span>Hobi:</span>
-          <input type="hobi" id="txthobi" name="txthobi" placeholder="isi hobi anda........." required autocomplete="email">
+          <input type="Hobi" id="txthobi" name="txthobi" placeholder="isi hobi anda........." required autocomplete="email">
         </label>
 
         <label for="txtpasangan"><span>Pasangan:</span>
-          <input type="pasangan" id="txtpasangan" name="txtpasangan" placeholder="isi pasangan anda kalau ada........." required autocomplete="email">
+          <input type="Pasangan" id="txtpasangan" name="txtpasangan" placeholder="isi pasangan anda kalau ada........." required autocomplete="email">
         </label>
 
         
         <label for="txtpekerjaan"><span>Pekerjaan:</span>
-          <input type="pekerjaan" id="txtpekerjaan" name="txtpekerjaan" placeholder="isi pekerjaan anda........." required autocomplete="email">
+          <input type="Pekerjaan" id="txtpekerjaan" name="txtpekerjaan" placeholder="isi pekerjaan anda........." required autocomplete="email">
         </label>
 
         <label for="txtnamaortu"><span>Nama Orang Tua:</span>
-          <input type="nama orang tua" id="txtnamaortu" name="txtnamaortu" placeholder="isi nama orang tua anda........." required autocomplete="email">
+          <input type="Nama Orang Tua" id="txtnamaortu" name="txtnamaortu" placeholder="isi nama orang tua anda........." required autocomplete="email">
         </label>
 
         <label for="txtnamakakak"><span>Nama Kakak:</span>
-          <input type="nama kakak" id="txtnamakakak" name="txtnamakakak" placeholder="isi nama kakak anda........." required autocomplete="email">
+          <input type="Nama Kakak" id="txtnamakakak" name="txtnamakakak" placeholder="isi nama kakak anda........." required autocomplete="email">
         </label>
 
         <label for="txtnamaadik"><span>Nama Adik:</span>
-          <input type="nama adik" id="txtnamadik" name="txtnamaadik" placeholder="isi nama adik anda........." required autocomplete="email">
+          <input type="Nama Adik" id="txtnamadik" name="txtnamaadik" placeholder="isi nama adik anda........." required autocomplete="email">
         </label>
 
-  
 
         <button type="submit">Kirim</button>
         <button type="reset">Batal</button>
@@ -122,16 +127,16 @@ $sesnamaadik = $_SESSION["txtnamaadik"] ?? "";
       ?>
 
       <h2>Tentang Saya</h2>
-      <p><strong>NIM:</strong><?php echo $sesnim?> </p>
-      <p><strong>Nama Lengkap:</strong><?php echo $sesnama?></p>
-      <p><strong>Tempat Lahir:</strong><?php echo $sestempatlahir?></p>
-      <p><strong>Tanggal Lahir:</strong> <?php echo $sestanggallahir?></p>
-      <p><strong>Hobi:</strong><?php echo $seshobi?></p>
-      <p><strong>Pasangan:</strong> <?php echo $sespasangan ?></p>
-      <p><strong>Pekerjaan:</strong><?php echo $sespekerjaan?></p>
-      <p><strong>Nama Orang Tua:</strong> <?php echo $sesnamaortu?></p>
-      <p><strong>Nama Kakak:</strong> <?php echo $sesnamakakak?></p>
-      <p><strong>Nama Adik:</strong> <?php echo $sesnamaadik?></p>
+      <p><strong>Nim:</strong><?php echo $sesnim;?> </p>
+      <p><strong>Nama Lengkap:</strong><?php echo $sesnama;?></p>
+      <p><strong>Tempat Lahir:</strong><?php echo $sestempatlahir;?></p>
+      <p><strong>Tanggal Lahir:</strong> <?php echo $sestanggallahir;?></p>
+      <p><strong>Hobi:</strong><?php echo $seshobi;?></p>
+      <p><strong>Pasangan:</strong> <?php echo $sespasangan;?></p>
+      <p><strong>Pekerjaan:</strong><?php echo $sespekerjaan;?></p>
+      <p><strong>Nama Orang Tua:</strong> <?php echo $sesnamaortu;?></p>
+      <p><strong>Nama Kakak:</strong> <?php echo $sesnamakakak;?></p>
+      <p><strong>Nama Adik:</strong> <?php echo $sesnamaadik;?></p>
     </section>
 
 
@@ -139,8 +144,8 @@ $sesnamaadik = $_SESSION["txtnamaadik"] ?? "";
       <h2>Kontak Kami</h2>
       <form action=" " method="POST">
 
-        <label for="txtnama"><span>Nama:</span>
-          <input type="text" id="sesnamaaku" name="txtnamaaku" placeholder="Masukkan nama" required autocomplete="name">
+        <label for="txtNama"><span>Nama:</span>
+          <input type="text" id="sesNamaaku" name="txtNamaaku" placeholder="Masukkan nama" required autocomplete="name">
         </label>
 
         <label for="txtEmail"><span>Email:</span>
