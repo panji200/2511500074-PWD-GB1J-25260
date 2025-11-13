@@ -8,11 +8,11 @@ Kelompok: GB1J<br>
 Proses saya mengerjakan UTS ini sebagai berikut:<br>
 <ol>
   <li>download file zip di elearning dan di extract</li>
-  <li>menambahkan action=uts.php</li>
+  <li>menambahkan action=proses.php</li>
   <li>pada java script ubah dari e.target.reset</li>
   <li>menyimpan nilai input ke variabel</li>
   <li>about ditentang saya lakukan echo sesuai nama fariabel yang telah kita buat</li>
   <li>membuat section baru Entry Data Mahasiswa</li>
   <li>buat form dengan sesuai yang kita buat di sesion</li>
-  <li>menambah header dan footer</li>
+  <li>menambah header dan footernya</li>
 </ol>
