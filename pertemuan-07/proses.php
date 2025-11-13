@@ -1,9 +1,17 @@
 <?php
 session_start();
-$sesnama = $_POST["txtNama"];
-$sesemail = $_POST["txtEmail"];
-$sespesan = $_POST["txtPesan"];
-$SESSION["sesnama"] = $sesnama;
-$SESSION["sesemail"] = $sesemail;
-$SESSION["sespesan"] = $sespesan;
+
+// Terima data dari form
+$nama = $_POST['txtNama'] ?? '';
+$email = $_POST['txtEmail'] ?? '';
+$pesan = $_POST['txtPesan'] ?? '';
+
+// Simpan ke session
+$_SESSION['sesnama'] = $nama;
+$_SESSION['sesemail'] = $email;
+$_SESSION['sespesan'] = $pesan;
+
+// Redirect kembali ke index.php
+header('Location: index.php');
+exit();
 ?>

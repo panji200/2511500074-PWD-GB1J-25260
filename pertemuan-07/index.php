@@ -1,5 +1,14 @@
 <?php
 session_start();
+
+// Debug: tampilkan semua session
+echo "<!-- Session Data: ";
+print_r($_SESSION);
+echo " -->";
+
+$sesnama = $_SESSION["sesnama"] ?? '';
+$sesemail = $_SESSION["sesemail"] ?? '';
+$sespesan = $_SESSION["sespesan"] ?? '';
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +95,11 @@ session_start();
         <button type="submit">Kirim</button>
         <button type="reset">Batal</button>
       </form>
+      <h2>Yang menghubungi kami</h2>
+      <p><strong>Nama:</strong><?php echo $sesnama;?></p>
+      <p><strong>Email:</strong><?php echo $sesemail;?></p>
+      <p><strong>Pesan:</strong><?php echo $sespesan;?></p>
+      
     </section>
   </main>
 
