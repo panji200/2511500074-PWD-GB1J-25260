@@ -1,3 +1,11 @@
-# Tugas pertemuan-08
-
-Repository untuk tugas pertemuan-08 mata kuliah Pemrograman Web Dasar
+# pertemuan-08
+saya uts matakuliah pwd:<br><br>
+Hari ini, kamis 13.NOV.2025, saya:<br>
+NIM: 2511500074<br>
+Nama: PANJI<br>
+Kelompok: GB1J<br>
+<br>
+Proses saya mengerjakan UTS ini sebagai berikut:<br>
+<ol>
+  <li>download file zip di elearning dan di extract</li>
+</ol>
