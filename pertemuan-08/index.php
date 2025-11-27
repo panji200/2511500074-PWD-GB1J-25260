@@ -139,7 +139,6 @@ $sesnamaadik = $_SESSION["namaadik"] ?? '';
       <p><strong>Nama Adik:</strong> <?php echo $sesnamaadik;?></p>
     </section>
 
-
     <section id="contact">
       <h2>Kontak Kami</h2>
       <form action=" " method="POST">
