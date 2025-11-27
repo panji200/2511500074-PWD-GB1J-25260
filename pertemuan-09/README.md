@@ -14,4 +14,5 @@ hari ini tanggal 27 november 2025<br>
   <li>echo session ke nilai label section contact selesai</li>
   <li>Modif file proses php menjadi bentuk array associative</li>
   <li>Hapus baris 23-32, sebagai gantinya ketikkan SESSION biodata</li>
+  <li>Update file readme.MD kemudian simpan</li>
 </ol>
