@@ -9,4 +9,5 @@ hari ini tanggal 4 desember 2025<br>
 <LI>mengetik query untuk membuat tabel tbl_tamu</li>
 <li>menambah folder read.php</li>
 <li>melakukan pengisian data atau record untuk tabel tbl_tamu</li>
+<li>membuat file read_inc.php</li>
 </ol>
