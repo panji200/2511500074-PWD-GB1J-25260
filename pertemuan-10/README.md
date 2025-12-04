@@ -10,4 +10,5 @@ hari ini tanggal 4 desember 2025<br>
 <li>menambah folder read.php</li>
 <li>melakukan pengisian data atau record untuk tabel tbl_tamu</li>
 <li>membuat file read_inc.php</li>
+<li>merubah code pada baris 146</li>
 </ol>
