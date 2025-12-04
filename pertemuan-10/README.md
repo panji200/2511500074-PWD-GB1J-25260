@@ -6,4 +6,5 @@ hari ini tanggal 4 desember 2025<br>
 <li>menambahkan folder konesi.php</li>
 <li>menambah host, user, password di folder koneksi.php</li>
 <li>mengisi nama database dengan nama db_pwd2025</li>
+<LI>mengetik query untuk membuat tabel tbl_tamu</li>
 </ol>
