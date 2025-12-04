@@ -8,4 +8,5 @@ hari ini tanggal 4 desember 2025<br>
 <li>mengisi nama database dengan nama db_pwd2025</li>
 <LI>mengetik query untuk membuat tabel tbl_tamu</li>
 <li>menambah folder read.php</li>
+<li>melakukan pengisian data atau record untuk tabel tbl_tamu</li>
 </ol>
