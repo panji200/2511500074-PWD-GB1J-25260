@@ -12,4 +12,5 @@ hari ini tanggal 4 desember 2025<br>
 <li>membuat file read_inc.php</li>
 <li>merubah code pada baris 146</li>
 <li>merubah code pada file index.php lalu simpan</li>
+<li>menanbahkan folder localhost</li>
 </ol>
