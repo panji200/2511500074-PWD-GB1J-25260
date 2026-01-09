@@ -2,8 +2,10 @@
 session_start();
 require 'koneksi.php';
 
+
 $sql = "SELECT * FROM mahasiswa ORDER BY created_at DESC";
 $q = mysqli_query($conn, $sql);
+
 
 if (!$q) {
     die("Query error: " . mysqli_error($conn));
@@ -55,8 +57,10 @@ unset($_SESSION['flash_sukses'], $_SESSION['flash_error']);
         <tr>
             <td><?= $no++ ?></td>
             <td>
+                <!-- Link untuk edit data mahasiswa -->
                 <a href="edit.php?nim=<?= urlencode($row['nim']) ?>">Edit</a>
                 |
+                <!-- Link untuk delete data mahasiswa dengan konfirmasi -->
                 <a href="proses_delete.php?nim=<?= urlencode($row['nim']) ?>"
                    onclick="return confirm('Hapus <?= htmlspecialchars($row['nama']) ?> ?')">
                    Delete
@@ -71,7 +75,7 @@ unset($_SESSION['flash_sukses'], $_SESSION['flash_error']);
     <?php endwhile; ?>
 </table>
 
-
+<!-- link kembali ke biodata mahasiswa -->
 <div class="btn-kembali" style="margin-top:15px;">
     <a href="index.php" class="reset">← Kembali</a>
 </div>
