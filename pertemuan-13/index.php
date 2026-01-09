@@ -81,7 +81,7 @@ require_once __DIR__ . '/fungsi.php';
     </section>
   </main>
 
-  // Footer
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 Pemrograman Web Dasar</p>
   </footer>
