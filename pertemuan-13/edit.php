@@ -3,49 +3,27 @@
   require 'koneksi.php';
   require 'fungsi.php';
 
-  /*
-    Ambil nilai cid dari GET dan lakukan validasi untuk 
-    mengecek cid harus angka dan lebih besar dari 0 (> 0).
-    'options' => ['min_range' => 1] artinya cid harus ≥ 1 
-    (bukan 0, bahkan bukan negatif, bukan huruf, bukan HTML).
-  */
-  $cid = filter_input(INPUT_GET, 'cid', FILTER_VALIDATE_INT, [
-    'options' => ['min_range' => 1]
-  ]);
-  /*
-    Skrip di atas cara penulisan lamanya adalah:
-    $cid = $_GET['cid'] ?? '';
-    $cid = (int)$cid;
+  // ambil NIM (string, bukan int)
+  $nim = filter_input(INPUT_GET, 'nim', FILTER_SANITIZE_SPECIAL_CHARS);
 
-    Cara lama seperti di atas akan mengambil data mentah 
-    kemudian validasi dilakukan secara terpisah, sehingga 
-    rawan lupa validasi. Untuk input dari GET atau POST, 
-    filter_input() lebih disarankan daripada $_GET atau $_POST.
-  */
-
-  /*
-    Cek apakah $cid bernilai valid:
-    Kalau $cid tidak valid, maka jangan lanjutkan proses, 
-    kembalikan pengguna ke halaman awal (read.php) sembari 
-    mengirim penanda error.
-  */
-  if (!$cid) {
+  if (!$nim) {
     $_SESSION['flash_error'] = 'Akses tidak valid.';
     redirect_ke('read.php');
   }
 
-  /*
-    Ambil data lama dari DB menggunakan prepared statement, 
-    jika ada kesalahan, tampilkan penanda error.
-  */
-  $stmt = mysqli_prepare($conn, "SELECT cid, cnama, cemail, cpesan 
-                                    FROM tbl_tamu WHERE cid = ? LIMIT 1");
+  // ambil data mahasiswa
+  $stmt = mysqli_prepare($conn,
+    "SELECT nim, nama, alamat, jurusan
+     FROM mahasiswa
+     WHERE nim = ? LIMIT 1"
+  );
+
   if (!$stmt) {
     $_SESSION['flash_error'] = 'Query tidak benar.';
     redirect_ke('read.php');
   }
 
-  mysqli_stmt_bind_param($stmt, "i", $cid);
+  mysqli_stmt_bind_param($stmt, "s", $nim);
   mysqli_stmt_execute($stmt);
   $res = mysqli_stmt_get_result($stmt);
   $row = mysqli_fetch_assoc($res);
@@ -56,19 +34,20 @@
     redirect_ke('read.php');
   }
 
-  #Nilai awal (prefill form)
-  $nama  = $row['cnama'] ?? '';
-  $email = $row['cemail'] ?? '';
-  $pesan = $row['cpesan'] ?? '';
+  // nilai awal form
+  $nama    = $row['nama'] ?? '';
+  $alamat  = $row['alamat'] ?? '';
+  $jurusan = $row['jurusan'] ?? '';
 
-  #Ambil error dan nilai old input kalau ada
+  // flash & old input
   $flash_error = $_SESSION['flash_error'] ?? '';
   $old = $_SESSION['old'] ?? [];
   unset($_SESSION['flash_error'], $_SESSION['old']);
+
   if (!empty($old)) {
-    $nama  = $old['nama'] ?? $nama;
-    $email = $old['email'] ?? $email;
-    $pesan = $old['pesan'] ?? $pesan;
+    $nama    = $old['nama'] ?? $nama;
+    $alamat  = $old['alamat'] ?? $alamat;
+    $jurusan = $old['jurusan'] ?? $jurusan;
   }
 ?>
 
@@ -77,15 +56,14 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Judul Halaman</title>
+    <title>Edit Biodata Mahasiswa</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+
     <header>
       <h1>Ini Header</h1>
-      <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
-        &#9776;
-      </button>
+      <button class="menu-toggle" id="menuToggle">&#9776;</button>
       <nav>
         <ul>
           <li><a href="#home">Beranda</a></li>
@@ -97,43 +75,43 @@
 
     <main>
       <section id="contact">
-        <h2>Edit Buku Tamu</h2>
+        <h2>Edit Biodata Mahasiswa</h2>
+
         <?php if (!empty($flash_error)): ?>
-          <div style="padding:10px; margin-bottom:10px; 
+          <div style="padding:10px; margin-bottom:10px;
             background:#f8d7da; color:#721c24; border-radius:6px;">
             <?= $flash_error; ?>
           </div>
         <?php endif; ?>
+
         <form action="proses_update.php" method="POST">
 
-          <input type="text" name="cid" value="<?= (int)$cid; ?>">
-
-          <label for="txtNama"><span>Nama:</span>
-            <input type="text" id="txtNama" name="txtNamaEd" 
-              placeholder="Masukkan nama" required autocomplete="name"
-              value="<?= !empty($nama) ? $nama : '' ?>">
+          <label>
+            <span>NIM</span>
+          <input type="number" name="nim" value="<?= htmlspecialchars($nim); ?>">
           </label>
 
-          <label for="txtEmail"><span>Email:</span>
-            <input type="email" id="txtEmail" name="txtEmailEd" 
-              placeholder="Masukkan email" required autocomplete="email"
-              value="<?= !empty($email) ? $email : '' ?>">
+          <label>
+            <span>Nama</span>
+            <input type="text" name="nama" required
+              value="<?= htmlspecialchars($nama); ?>">
           </label>
 
-          <label for="txtPesan"><span>Pesan Anda:</span>
-            <textarea id="txtPesan" name="txtPesanEd" rows="4" 
-              placeholder="Tulis pesan anda..." 
-              required><?= !empty($pesan) ? $pesan : '' ?></textarea>
+          <label>
+            <span>Alamat</span>
+            <textarea name="alamat" required><?= htmlspecialchars($alamat); ?></textarea>
           </label>
 
-          <label for="txtCaptcha"><span>Captcha 2 x 3 = ?</span>
-            <input type="number" id="txtCaptcha" name="txtCaptcha" 
-              placeholder="Jawab Pertanyaan..." required>
+          <label>
+            <span>Jurusan</span>
+            <input type="text" name="jurusan"
+              value="<?= htmlspecialchars($jurusan); ?>">
           </label>
 
           <button type="submit">Kirim</button>
           <button type="reset">Batal</button>
           <a href="read.php" class="reset">Kembali</a>
+
         </form>
       </section>
     </main>
