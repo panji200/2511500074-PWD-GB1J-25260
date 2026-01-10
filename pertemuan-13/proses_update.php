@@ -1,112 +1,72 @@
 <?php
-  session_start();
-  require __DIR__ . '/koneksi.php';
-  require_once __DIR__ . '/fungsi.php';
+session_start();
+require __DIR__ . '/koneksi.php';
+require_once __DIR__ . '/fungsi.php';
 
-  #cek method form, hanya izinkan POST
-  if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    $_SESSION['flash_error'] = 'Akses tidak valid.';
-    redirect_ke('read.php');
-  }
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+  $_SESSION['flash_error'] = 'Akses tidak valid.';
+  redirect_ke('read.php');
+}
 
-  #validasi cid wajib angka dan > 0
-  $cid = filter_input(INPUT_POST, 'cid', FILTER_VALIDATE_INT, [
-    'options' => ['min_range' => 1]
-  ]);
+// ambil data dari form
+$nim_lama = bersihkan($_POST['nim_lama'] ?? ''); // NIM lama untuk WHERE
+$nim      = bersihkan($_POST['nim'] ?? '');     // NIM baru
+$nama     = bersihkan($_POST['nama'] ?? '');
+$alamat   = bersihkan($_POST['alamat'] ?? '');
+$jurusan  = bersihkan($_POST['jurusan'] ?? '');
 
-  if (!$cid) {
-    $_SESSION['flash_error'] = 'CID Tidak Valid.';
-    redirect_ke('edit.php?cid='. (int)$cid);
-  }
+// validasi form
+$errors = [];
+if ($nim === '')      $errors[] = 'NIM wajib diisi.';
+if ($nama === '')     $errors[] = 'Nama wajib diisi.';
+if ($alamat === '')   $errors[] = 'Alamat wajib diisi.';
+if ($jurusan === '')  $errors[] = 'Jurusan wajib diisi.';
+if (mb_strlen($nama) < 3) $errors[] = 'Nama minimal 3 karakter.';
 
-  #ambil dan bersihkan (sanitasi) nilai dari form
-  $nama  = bersihkan($_POST['txtNamaEd']  ?? '');
-  $email = bersihkan($_POST['txtEmailEd'] ?? '');
-  $pesan = bersihkan($_POST['txtPesanEd'] ?? '');
-  $captcha = bersihkan($_POST['txtCaptcha'] ?? '');
+if (!empty($errors)) {
+  $_SESSION['old'] = compact('nim','nama','alamat','jurusan');
+  $_SESSION['flash_error'] = implode('<br>', $errors);
+  redirect_ke('edit.php?nim=' . urlencode($nim_lama));
+  exit;
+}
 
-  #Validasi sederhana
-  $errors = []; #ini array untuk menampung semua error yang ada
+// cek apakah NIM baru sudah ada di database selain record ini
+$stmt_check = mysqli_prepare($conn, "SELECT nim FROM mahasiswa WHERE nim=? AND nim<>?");
+mysqli_stmt_bind_param($stmt_check, "ss", $nim, $nim_lama);
+mysqli_stmt_execute($stmt_check);
+$res_check = mysqli_stmt_get_result($stmt_check);
 
-  if ($nama === '') {
-    $errors[] = 'Nama wajib diisi.';
-  }
+if (mysqli_num_rows($res_check) > 0) {
+    $_SESSION['flash_error'] = "NIM $nim sudah digunakan.";
+    $_SESSION['old'] = compact('nim','nama','alamat','jurusan');
+    redirect_ke('edit.php?nim=' . urlencode($nim_lama));
+    exit;
+}
 
-  if ($email === '') {
-    $errors[] = 'Email wajib diisi.';
-  } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = 'Format e-mail tidak valid.';
-  }
+// query update termasuk NIM baru
+$stmt = mysqli_prepare(
+  $conn,
+  "UPDATE mahasiswa
+   SET nim = ?, nama = ?, alamat = ?, jurusan = ?
+   WHERE nim = ?"
+);
 
-  if ($pesan === '') {
-    $errors[] = 'Pesan wajib diisi.';
-  }
+if (!$stmt) {
+  $_SESSION['flash_error'] = 'Terjadi kesalahan sistem.';
+  redirect_ke('edit.php?nim=' . urlencode($nim_lama));
+}
 
-  if ($captcha === '') {
-    $errors[] = 'Pertanyaan wajib diisi.';
-  }
+mysqli_stmt_bind_param($stmt, "sssss", $nim, $nama, $alamat, $jurusan, $nim_lama);
 
-  if (mb_strlen($nama) < 3) {
-    $errors[] = 'Nama minimal 3 karakter.';
-  }
+if (mysqli_stmt_execute($stmt)) {
+  unset($_SESSION['old']);
+  $_SESSION['flash_sukses'] = 'Data berhasil diperbarui.';
+  redirect_ke('read.php');
+} else {
+  $_SESSION['flash_error'] = 'Data gagal diperbarui.';
+  $_SESSION['old'] = compact('nim','nama','alamat','jurusan');
+  redirect_ke('edit.php?nim=' . urlencode($nim_lama));
+}
 
-  if (mb_strlen($pesan) < 10) {
-    $errors[] = 'Pesan minimal 10 karakter.';
-  }
-
-  if ($captcha!=="6") {
-    $errors[] = 'Jawaban '. $captcha.' captcha salah.';
-  }
-
-  /*
-  kondisi di bawah ini hanya dikerjakan jika ada error, 
-  simpan nilai lama dan pesan error, lalu redirect (konsep PRG)
-  */
-  if (!empty($errors)) {
-    $_SESSION['old'] = [
-      'nama'  => $nama,
-      'email' => $email,
-      'pesan' => $pesan
-    ];
-
-    $_SESSION['flash_error'] = implode('<br>', $errors);
-    redirect_ke('edit.php?cid='. (int)$cid);
-  }
-
-  /*
-    Prepared statement untuk anti SQL injection.
-    menyiapkan query UPDATE dengan prepared statement 
-    (WAJIB WHERE cid = ?)
-  */
-  $stmt = mysqli_prepare($conn, "UPDATE tbl_tamu 
-                                SET cnama = ?, cemail = ?, cpesan = ? 
-                                WHERE cid = ?");
-  if (!$stmt) {
-    #jika gagal prepare, kirim pesan error (tanpa detail sensitif)
-    $_SESSION['flash_error'] = 'Terjadi kesalahan sistem (prepare gagal).';
-    redirect_ke('edit.php?cid='. (int)$cid);
-  }
-
-  #bind parameter dan eksekusi (s = string, i = integer)
-  mysqli_stmt_bind_param($stmt, "sssi", $nama, $email, $pesan, $cid);
-
-  if (mysqli_stmt_execute($stmt)) { #jika berhasil, kosongkan old value
-    unset($_SESSION['old']);
-    /*
-      Redirect balik ke read.php dan tampilkan info sukses.
-    */
-    $_SESSION['flash_sukses'] = 'Terima kasih, data Anda sudah diperbaharui.';
-    redirect_ke('read.php'); #pola PRG: kembali ke data dan exit()
-  } else { #jika gagal, simpan kembali old value dan tampilkan error umum
-    $_SESSION['old'] = [
-      'nama'  => $nama,
-      'email' => $email,
-      'pesan' => $pesan,
-    ];
-    $_SESSION['flash_error'] = 'Data gagal diperbaharui. Silakan coba lagi.';
-    redirect_ke('edit.php?cid='. (int)$cid);
-  }
-  #tutup statement
-  mysqli_stmt_close($stmt);
-
-  redirect_ke('edit.php?cid='. (int)$cid);
+mysqli_stmt_close($stmt);
+?>

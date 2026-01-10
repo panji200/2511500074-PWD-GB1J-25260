@@ -35,6 +35,7 @@
   }
 
   // nilai awal form
+  $nim     = $row['nim'] ?? '';
   $nama    = $row['nama'] ?? '';
   $alamat  = $row['alamat'] ?? '';
   $jurusan = $row['jurusan'] ?? '';
@@ -45,6 +46,7 @@
   unset($_SESSION['flash_error'], $_SESSION['old']);
 
   if (!empty($old)) {
+    $nim     = $old['nim'] ?? $nim;
     $nama    = $old['nama'] ?? $nama;
     $alamat  = $old['alamat'] ?? $alamat;
     $jurusan = $old['jurusan'] ?? $jurusan;
@@ -62,19 +64,11 @@
   <body>
 
     <header>
-      <h1>Ini Header</h1>
-      <button class="menu-toggle" id="menuToggle">&#9776;</button>
-      <nav>
-        <ul>
-          <li><a href="#home">Beranda</a></li>
-          <li><a href="#about">Tentang</a></li>
-          <li><a href="#contact">Kontak</a></li>
-        </ul>
-      </nav>
+      <h1>Edit Biodata Mahasiswa</h1>
     </header>
-
     <main>
       <section id="contact">
+
         <h2>Edit Biodata Mahasiswa</h2>
 
         <?php if (!empty($flash_error)): ?>
@@ -89,6 +83,7 @@
           <label>
             <span>NIM</span>
           <input type="number" name="nim" value="<?= htmlspecialchars($nim); ?>">
+          <input type="hidden" name="nim_lama" value="<?= htmlspecialchars($nim); ?>">
           </label>
 
           <label>
