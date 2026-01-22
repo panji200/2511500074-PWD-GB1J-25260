@@ -1,6 +1,18 @@
 <?php
 session_start();
 require_once __DIR__ . '/fungsi.php';
+
+/* ===== FLASH BIODATA ===== */
+$flash_biodata = $_SESSION['flash_biodata'] ?? '';
+$flash_biodata_error = $_SESSION['flash_biodata_error'] ?? '';
+unset($_SESSION['flash_biodata'], $_SESSION['flash_biodata_error']);
+
+/* ===== FLASH CONTACT ===== */
+$flash_contact = $_SESSION['flash_contact'] ?? '';
+$flash_contact_error = $_SESSION['flash_contact_error'] ?? '';
+unset($_SESSION['flash_contact'], $_SESSION['flash_contact_error']);
+
+$old = $_SESSION['old'] ?? [];
 ?>
 
 <!DOCTYPE html>
@@ -40,30 +52,42 @@ require_once __DIR__ . '/fungsi.php';
 
     <section id="biodata">
       <h2>Biodata Pengunjung</h2>
+
+      <?php if ($flash_biodata): ?>
+    <div style="padding:10px;margin-bottom:10px;background:#d4edda;color:#155724;border-radius:6px;">
+      <?= $flash_biodata ?>
+    </div>
+  <?php endif; ?>
+
+  <?php if ($flash_biodata_error): ?>
+    <div style="padding:10px;margin-bottom:10px;background:#f8d7da;color:#721c24;border-radius:6px;">
+      <?= $flash_biodata_error ?>
+    </div>
+  <?php endif; ?>
       <form action="proses.php" method="POST">
 
-        <label for="txtKodePen"><span>Kode Pengunjung:</span>
-          <input type="text" id="txtKodePen" name="txtKodePen" placeholder="Masukkan Kode Pengunjung" required>
+        <label for="txtNim"><span>Kode Pengunjung:</span>
+          <input type="text" id="txtNim" name="txtNim" placeholder="Masukkan Kode Pengunjung" required>
         </label>
 
-        <label for="txtNmPengunjung"><span>Nama Pengunjung:</span>
-          <input type="text" id="txtNmPengunjung" name="txtNmPengunjung" placeholder="Masukkan Nama Pengunjung" required>
+        <label for="txtNmLengkap"><span>Nama Pengunjung:</span>
+          <input type="text" id="txtNmLengkap" name="txtNmLengkap" placeholder="Masukkan Nama Pengunjung" required>
         </label>
 
-        <label for="txtAlRmh"><span>Alamat Rumah:</span>
-          <input type="text" id="txtAlRmh" name="txtAlRmh" placeholder="Masukkan Alamat Rumah" required>
+        <label for="txtT4Lhr"><span>Alamat Rumah:</span>
+          <input type="text" id="txtT4Lhr" name="txtT4Lhr" placeholder="Masukkan Alamat Rumah" required>
         </label>
 
-        <label for="txtTglKunjungan"><span>Tanggal Kunjungan:</span>
-          <input type="text" id="txtTglKunjungan" name="txtTglKunjungan" placeholder="Masukkan Tanggal Kunjungan" required>
+        <label for="txtTglLhr"><span>Tanggal Kunjung:</span>
+          <input type="date" id="txtTglLhr" name="txtTglLhr" placeholder="Masukkan Tanggal Kunjung" required>
         </label>
 
         <label for="txtHobi"><span>Hobi:</span>
           <input type="text" id="txtHobi" name="txtHobi" placeholder="Masukkan Hobi" required>
         </label>
 
-        <label for="txtAsalSMA"><span>Asal SLTA:</span>
-          <input type="text" id="txtAsalSMA" name="txtAsalSMA" placeholder="Masukkan Asal SLTA" required>
+        <label for="txtPasangan"><span>Asal Sekolah:</span>
+          <input type="text" id="txtPasangan" name="txtPasangan" placeholder="Masukkan Asal Sekolah" required>
         </label>
 
         <label for="txtKerja"><span>Pekerjaan:</span>
@@ -74,12 +98,12 @@ require_once __DIR__ . '/fungsi.php';
           <input type="text" id="txtNmOrtu" name="txtNmOrtu" placeholder="Masukkan Nama Orang Tua" required>
         </label>
 
-        <label for="txtNmPacar"><span>Nama Pacar:</span>
-          <input type="text" id="txtNmPacar" name="txtNmPacar" placeholder="Masukkan Nama Pacar" required>
+        <label for="txtNmKakak"><span>Nama Pacar:</span>
+          <input type="text" id="txtNmKakak" name="txtNmKakak" placeholder="Masukkan Nama Kakak" required>
         </label>
 
-        <label for="txtNmMantan"><span>Nama Mantan:</span>
-          <input type="text" id="txtNmMantan" name="txtNmMantan" placeholder="Masukkan Nama Mantan" required>
+        <label for="txtNmAdik"><span>Nama Mantan:</span>
+          <input type="text" id="txtNmAdik" name="txtNmAdik" placeholder="Masukkan Nama Adik" required>
         </label>
 
         <button type="submit">Kirim</button>
@@ -91,16 +115,16 @@ require_once __DIR__ . '/fungsi.php';
     $biodata = $_SESSION["biodata"] ?? [];
 
     $fieldConfig = [
-      "kodepen" => ["label" => "Kode Pengunjung:", "suffix" => ""],
-      "nama" => ["label" => "Nama Pengunjung:", "suffix" => " &#128526;"],
-      "alamat" => ["label" => "Alamat Rumah:", "suffix" => ""],
-      "tanggal" => ["label" => "Tanggal Kunjungan:", "suffix" => ""],
-      "hobi" => ["label" => "Hobi:", "suffix" => " &#127926;"],
-      "slta" => ["label" => "Asal SLTA:", "suffix" => " &hearts;"],
-      "pekerjaan" => ["label" => "Pekerjaan:", "suffix" => " &copy; 2025"],
+      "nim" => ["label" => "NIM:", "suffix" => ""],
+      "nama" => ["label" => "Nama Lengkap:", "suffix" => " "],
+      "tempat" => ["label" => "Tempat Lahir:", "suffix" => ""],
+      "tanggal" => ["label" => "Tanggal Lahir:", "suffix" => ""],
+      "hobi" => ["label" => "Hobi:", "suffix" => " "],
+      "pasangan" => ["label" => "Pasangan:", "suffix" => " "],
+      "pekerjaan" => ["label" => "Pekerjaan:", "suffix" => " "],
       "ortu" => ["label" => "Nama Orang Tua:", "suffix" => ""],
-      "pacar" => ["label" => "Nama Pacar:", "suffix" => ""],
-      "mantan" => ["label" => "Nama Mantan:", "suffix" => ""],
+      "kakak" => ["label" => "Nama Kakak:", "suffix" => ""],
+      "adik" => ["label" => "Nama Adik:", "suffix" => ""],
     ];
     ?>
 
